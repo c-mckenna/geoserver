@@ -1442,7 +1442,7 @@ public class ResourcePool {
             // we checked above we are using DataStore/SimpleFeature/SimpleFeatureType (DSSFSFT)
             SimpleFeatureType schema = (SimpleFeatureType) getFeatureType(info);
             try {
-                if (!CRS.equalsIgnoreMetadata(resultCRS, schema.getCoordinateReferenceSystem()))
+                if (resultCRS != null && !resultCRS.equals(schema.getCoordinateReferenceSystem()))
                     schema = FeatureTypes.transform(schema, resultCRS);
             } catch (Exception e) {
                 throw new DataSourceException("Problem forcing CRS onto feature type", e);
